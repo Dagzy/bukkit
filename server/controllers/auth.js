@@ -2,6 +2,9 @@ var User = require('../models/user');
 exports.signup = function(req, res, next){
 	var email = req.body.email;
 	var password = req.body.password;
+	if (!email||!password){
+		return res.status(418).send({error: "You must provide email and password."});
+	}
 	User.findOne({email:email}, function(err, existingUser){
 		if(err){
 			return next(err);
@@ -22,6 +25,6 @@ exports.signup = function(req, res, next){
 		});
 	});
 	//console.log(req);
-	console.log(success: true);
+	//console.log(success: true);
 	//res.send("authorization is happening, yo");
 }
