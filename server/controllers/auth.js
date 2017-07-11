@@ -34,3 +34,8 @@ exports.signup = function(req, res, next){
 	//console.log(success: true);
 	//res.send("authorization is happening, yo");
 }
+exports.signin = function(req, res, next){
+	//User has already had their email and pw auth'd
+	//We just need to give them a token
+	res.send({token: createUserToken(req.user)});
+}
