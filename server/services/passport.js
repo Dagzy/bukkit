@@ -26,11 +26,11 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
 	//Otherwise, call done with false
 });
 const jwtOptions = {
-	jwtFromRequest: ExtractJwt.fromHeader('Authorization'),
+	jwtFromRequest: ExtractJwt.fromHeader('authorization'),
 	secretOrKey: config.secret
 };
 //create jwt strategy
-let jwtLogin = new JwtStrategy(jwtOptions, function(payload, done){
+const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done){
 	//On payload we have sub property. Use the User model, look through all users and find user with given
 	User.findById(payload.sub, function(err, user){
 		//In the findById callback, we will get two arguments err and user. Err is going to be populated if search fails

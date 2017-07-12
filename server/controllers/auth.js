@@ -25,7 +25,7 @@ exports.signup = function(req, res, next){
 		});
 		//To save the record to the DB.
 		user.save(function(err){
-			if(err){return next(err);}
+			if(err){return next(err);};
 			//4 Respond to request indicating the user was created
 			res.json({token: createUserToken(user)});
 		});
