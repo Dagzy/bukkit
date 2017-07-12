@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {selectBand} from '../../actions/index';
+import {selectBand} from '../actions/index';
 import {bindActionCreators} from 'redux';
 
 
