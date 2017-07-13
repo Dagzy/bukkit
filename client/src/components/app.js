@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import NavBarHeader from './Nav';
 import Video from './video/video';
 import BandList from './Containers/BandList';
+import Signin from './auth/signin';
 
 export default class App extends Component{
 	render(){
@@ -11,10 +12,9 @@ export default class App extends Component{
 
 				<NavBarHeader />
 				<Video />
-				<BandList />
-			
+				<Signin />
+				{this.props.children}
 			</div>
-			
 		);
 	}
 }
