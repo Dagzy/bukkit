@@ -29,6 +29,14 @@ export function signinUser ({email, password}){
 		.catch(response => dispatch(authError("Bad login info")));
 	};
 }
+//purpose of flag is to catch unauth_user case.
+//flips auth flag to false and there won't be any links associate with them
+//other thin to do is get rid of token
+export function signoutUser(){
+	localStorage.removeItem('token');
+	return {type: UNAUTH_USER};
+}
+
 export function authError(error){
 	return{
 		type: AUTH_ERROR,
