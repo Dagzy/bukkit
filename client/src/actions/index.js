@@ -1,6 +1,8 @@
 import axios from 'axios';
 import {reducer as formReducer} from 'redux-form';
 import {browserHistory} from 'react-router';
+import authReducer from '../reducers/auth_reducer';
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR } from './types';
 
 export const CREATE_POSTS = 'CREATE_POSTS';
 //const ROOT_URL = 'http://rest.learncode.academy/api/quizzle';
@@ -17,9 +19,19 @@ export function signinUser ({email, password}){
 	return function(dispatch){
 		axios.post(`${ROOT_URL}/signin`, {email, password})
 		.then(response => {
-			browserHistory.push('/newitem');
+			//This only kickstarts if the request was good...
+			//We not update the state to indicate authenticated user
+			dispatch ({ type: AUTH_USER });
+			localStorage.setItem('token', response.data.token);
+			//This sends us off to the /newitem view
+			browserHistory.push('/new-item');
 		})
-		.catch(() => {
-		});
+		.catch(response => dispatch(authError("Bad login info")));
+	};
+}
+export function authError(error){
+	return{
+		type: AUTH_ERROR,
+		payload: error
 	};
 }
