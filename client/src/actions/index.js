@@ -2,7 +2,7 @@ import axios from 'axios';
 import {reducer as formReducer} from 'redux-form';
 import {browserHistory} from 'react-router';
 import authReducer from '../reducers/auth_reducer';
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, CREATE_POSTS } from './types';
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, CREATE_POSTS, FETCH_POSTS } from './types';
 
 
 //export const CREATE_POSTS = 'CREATE_POSTS';
@@ -23,7 +23,7 @@ export function createPost(props){
 				payload: request
 			});
 			console.log(browserHistory);
-			browserHistory.push('/new-item');
+			browserHistory.push('/items');
 		});
 	}
 }
@@ -66,5 +66,17 @@ export function signupUser({email, password}){
 				browserHistory.push('/new-item');
 			})
 			.catch(response => dispatch(authError(response.data.error)));
+	}
+}
+export function fetchPosts(){
+	return function(dispatch){
+		axios.get(`${ROOT_URL}/items`, config)
+		.then((response)=>{
+			console.log("Response", response)
+			dispatch({
+				type: FETCH_POSTS,
+				payload: response
+			});
+		});
 	}
 }
