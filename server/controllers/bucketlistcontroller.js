@@ -2,13 +2,13 @@ const BucketList = require('../models/bucketlist.js');
 exports.addBucketList = function(req, res, next){
 	//For Postman use
 	//var title = req.body.title
-	const title = req.body.props.title;
-	const topic = req.body.props.topic;
-	const url = req.body.props.url;
-	const content = req.body.props.content;
-	const specificUser = req.user;
+	let title = req.body.props.title;
+	let topic = req.body.props.topic;
+	let url = req.body.props.url;
+	let content = req.body.props.content;
+	let specificUser = req.user._id;
 
-	const bucketList = new BucketList({
+	let bucketList = new BucketList({
 		title: title,
 		topic: topic,
 		url: url,
@@ -22,4 +22,16 @@ exports.addBucketList = function(req, res, next){
 		}
 		res.json(bucketList);
 	});
+}
+exports.fetchBucketLists = function(req, res){
+	let specificUser = req.user._id;
+	BucketList.find({specificUser: specificUser})
+	.then(
+		function fetchSuccess(data){
+			res.json(data);
+		},
+		function fetchError(err){
+			res.send(500, err.message);
+		}
+	);
 }

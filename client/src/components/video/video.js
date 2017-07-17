@@ -14,7 +14,7 @@ class Video extends Component {
 			videos: [],
 			selectedVideo: null
 		};
-		this.videoSearch('bucketlist');
+		this.videoSearch('triathlon');
 	}
 	videoSearch(term){
 		YTSearch({key:API_KEY, term:term}, (videos)=> {

@@ -19,15 +19,15 @@ class NavBarHeader extends Component {
 			<Navbar>
 				<Navbar.Header>
 					<Navbar.Brand>
-						<a href="#">Bukkitlist</a>
+						<a href="#">Triathlon Training Authority</a>
 					</Navbar.Brand>
 				</Navbar.Header>
 				<Nav>
 					{this.renderLinks()}
-					<NavDropdown key={3} title="Ninja Moves" id="basic-nav-dropdown">
-						<MenuItem key={3.1}>Action</MenuItem>
-						<MenuItem key={3.2}>Another Action</MenuItem>
-						<MenuItem key={3.3}>Something Else Here</MenuItem>
+					<NavDropdown key={3} title="Training Sources" id="basic-nav-dropdown">
+						<MenuItem key={3.1} href="https://www.globalcyclingnetwork.com/">Global Cycling Network</MenuItem>
+						<MenuItem key={3.2} href="http://www.runnersforum.com/index.php">Runner's Forum</MenuItem>
+						<MenuItem key={3.3} href="https://www.swimmingworldmagazine.com/">Swimming World</MenuItem>
 						<MenuItem divider />
 						<MenuItem key={3.4}>Seperated Link</MenuItem>
 					</NavDropdown>
