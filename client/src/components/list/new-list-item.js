@@ -7,7 +7,7 @@ class ListItem extends Component {
 	handleFormSubmit(formProps){
 		this.props.createPost(formProps);
 		//call action creator to sign up the user
-		console.log
+		
 	}
 	render(){
 		const {fields:{title, topic, url, content}, handleSubmit} = this.props;

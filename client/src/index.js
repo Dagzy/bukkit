@@ -9,6 +9,8 @@ import {Router, Route, IndexRoute, browserHistory}from 'react-router';
 import Signin from './components/auth/signin';
 import ListItem from './components/list/new-list-item';
 import Signout from './components/auth/signout';
+import Signup from './components/auth/signup';
+import RequireAuth from './components/auth/require_auth';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
@@ -17,8 +19,9 @@ ReactDOM.render(
 		<Router history={browserHistory}>
 			<Route path="/" component={App}>
 				<Route path="signin" component={Signin} />
-				<Route path="new-item" component={ListItem} />
 				<Route path="signout" component={Signout} />
+				<Route path="signup" component={Signup} />
+				<Route path="new-item" component={RequireAuth(ListItem)} />
 			</Route>
 		</Router>
 	</Provider>,

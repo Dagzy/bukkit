@@ -1,16 +1,15 @@
 const Auth = require('./controllers/auth');
-const passport = require('passport');
+const BucketList = require('./controllers/bucketlistcontroller')
+
 const passportService = require('./services/passport');
-const requireSignin = passport.authenticate('local', {session: false});
+const passport = require('passport');
 
 const requireAuth = passport.authenticate('jwt', {session:false});
+const requireSignin = passport.authenticate('local', {session: false});
 
 module.exports = function(app){
-	app.get('/', requireAuth, function(req, res){
-		res.send({message:'hey'});
-		//res.send({hi:'there'});
-	});
 	app.post('/signup', Auth.signup);
 	app.post('/signin', requireSignin, Auth.signin);
+	app.post('/new-item', requireAuth, BucketList.addBucketList);
 }
 //console.log(req.body);
