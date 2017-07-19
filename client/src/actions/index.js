@@ -2,7 +2,7 @@ import axios from 'axios';
 import {reducer as formReducer} from 'redux-form';
 import {browserHistory} from 'react-router';
 import authReducer from '../reducers/auth_reducer';
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, CREATE_POSTS, FETCH_POSTS, DELETE_POST, FETCH_POST } from './types';
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, CREATE_POSTS, FETCH_POSTS, DELETE_POST, FETCH_POST, UPDATE_POST} from './types';
 
 
 //export const CREATE_POSTS = 'CREATE_POSTS';
@@ -100,6 +100,18 @@ export function deletePost(id){
 				type: DELETE_POST,
 				payload: response
 			})
+			browserHistory.push('/items');
+		});
+	}
+}
+export function updatePost(props, id){
+	return function(dispatch){
+		axios.put(`${ROOT_URL}/items/${id}`, {props}, config)
+		.then(response => {
+			dispatch({
+				type: UPDATE_POST,
+				payload: response
+			});
 			browserHistory.push('/items');
 		});
 	}

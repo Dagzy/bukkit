@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {fetchPosts} from '../../actions/index';
+import * as actions from '../../actions/index';
 import {Link} from 'react-router';
 import axios from 'axios';
 
@@ -9,24 +9,11 @@ const config = {
 	headers: {Authorization: localStorage.getItem('token')}
 }
 class ListItems extends Component {
-	constructor(props){
-		super(props);
-		this.state = {
-			posts: []
-		}
-	}
 	componentWillMount(){
-		axios.get(`${ROOT_URL}/items`, config)
-		.then((response) => {
-			const posts = response.data;
-			console.log("Response", response)
-			this.setState({
-				posts: [...posts]
-			})
-		})
+		this.props.fetchPosts();
 	}
 	renderItems(){
-		return this.state.posts.map((post) => {
+		return this.props.posts.map((post) => {
 			return(
 				<li className="list-group-item" key={post._id}>
 					<Link to= {"items/" + post._id}>
@@ -38,7 +25,7 @@ class ListItems extends Component {
 		});
 	}
 	render() {
-		if (this.state.posts == 0){
+		if (this.props.posts == 0){
 			return(
 				<div><h3>Still loading...</h3></div>
 			);
@@ -47,7 +34,7 @@ class ListItems extends Component {
 				<div className="col-md-4">
 					<div className="row">
 						<div className="text-sm-6 text-xs-left"> 
-							<h3 className="text-xs-left">Lists</h3>
+							<h3 className="thelabel" className="text-xs-left">Lists</h3>
 						</div>
 						<div>
 							<Link to="/new-item" className="btn btn-primary">
@@ -67,4 +54,25 @@ class ListItems extends Component {
 function mapStateToProps(state){
 	return {posts: state.posts.all};
 }
-export default connect(mapStateToProps, {fetchPosts: fetchPosts})(ListItems);
+export default connect(mapStateToProps, actions)(ListItems);
+
+
+{/*)
+
+These functions are replaced by above componentWillMount
+	constructor(props){
+		super(props);
+		this.state = {
+			posts: []
+		}
+	} 
+	componentWillMount(){
+		axios.get(`${ROOT_URL}/items`, config)
+		.then((response) => {
+			const posts = response.data;
+			console.log("Response", response)
+			this.setState({
+				posts: [...posts]
+			})
+		})
+	} */}

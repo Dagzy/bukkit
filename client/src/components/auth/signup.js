@@ -23,19 +23,19 @@ class Signup extends Component {
 		return (
 			<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 				<fieldset className="form-group">
-					<label>Email</label>
+					<label className="thelabel">Email</label>
 					<input className="form-control" {...email}/>
 					{email.touched && email.error && <div className="error">{email.error}</div>}
 				</fieldset>
 
 				<fieldset className="form-group">
-					<label>Password</label>
+					<label className="thelabel">Password</label>
 					<input type= "password" className= "form-control" {...password} />
 					{password.error}
 				</fieldset>
 
 				<fieldset className="form-group">
-					<label>Confirm Password</label>
+					<label className="thelabel">Confirm Password</label>
 					<input type= "password" className= "form-control" {...passwordConfirm} />
 					{passwordConfirm.touched && passwordConfirm.error && <div className="error">{passwordConfirm.error}</div>}					
 				</fieldset>
